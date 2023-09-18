@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environment
+venv/
+env/
+bin/
+include/
+lib/
+libs/
+lib64/
+
+# IDE/Editor
+.vscode/
+.idea/
+
+# Compiled Python files
+*.pyc
+__pycache__/
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+
+# Design file
+*.drawio
