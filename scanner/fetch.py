@@ -4,5 +4,3 @@ class Fetch:
   """
   def __init__(self):
     pass
-  
-  

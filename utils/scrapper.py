@@ -1,6 +1,10 @@
 import sys
-import github
+
 import requests
+
+import github
+
+# TODO: Modify scrapping policy to fetch real python repositories, since some only contain under hundread line of code
 
 class Scrapper:
   def __init__(self):
@@ -17,14 +21,14 @@ class Scrapper:
     self.headers = {
       'Authorization': f'token {self.access_token}',
     }
-    
+
   def run(self) -> list:
     if self.access_token is None:
       print(f"Warning: {self.access_token} environment variable is not set.")
-      sys.exit(1)    
+      sys.exit(1)
 
     repos = []
-    
+
     # Send the GET request to the GitHub API
     response = requests.get(self.url, params=self.params, headers=self.headers)
 
@@ -35,7 +39,7 @@ class Scrapper:
       for repo in data['items']:
         owner, repo_name = repo['owner']['login'], repo['name']
         repos.append(f"{owner}/{repo_name}")
-        
+
       return repos
     else:
       print(f"Error: {response.status_code} - {response.text}")

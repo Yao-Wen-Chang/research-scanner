@@ -1,3 +1,7 @@
+SHELL := bash
+
+
+PACKAGE_NAME := scanner
 VENV_NAME = myenv
 PYTHON = python3
 VENV_DIR = .venv
@@ -31,12 +35,28 @@ install: venv
 	@echo "Installing dependencies..."
 	@$(VENV_DIR)/bin/pip install -r requirements.txt
 	@echo "Dependencies installed."
+	@echo "Installing jq..."
+	@sudo apt-get install jq
+	@echo "jq installed."
 
+.PHONY: setup
+setup: venv
+	@pre-commit install
+
+.PHONY: check
+check:
+	@pre-commit run --all-files
+
+.PHONY: run
+run:
+	@python3 main.py
 # Clean up the virtual environment
 .PHONY: clean
-clean: 
+clean:
+	@echo "Deactivate"
+	@deactivate
 	@echo "Removing virtual environment..."
-	@rm -rf $(VENV_DIR) 
+	@rm -rf $(VENV_DIR)
 	@find . -type f -name *.pyc -delete
 	@find . -type d -name __pycache__ -delete
 	@echo "Virtual environment removed."
